@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_URL=http://host.docker.internal:11434
+      - OLLAMA_MODEL=ministral-3:3b
+    volumes:
+      - ./backend/tts_models:/app/tts_models
+      - ./backend/game.db:/app/game.db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  # Optional: Ollama container (if you want to run Ollama in Docker)
+  # ollama:
+  #   image: ollama/ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+
+# volumes:
+#   ollama_data:

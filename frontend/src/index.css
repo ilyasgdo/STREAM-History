@@ -1,0 +1,352 @@
+@import 'tailwindcss';
+
+/* Import Leaflet CSS */
+@import 'leaflet/dist/leaflet.css';
+
+/* Custom styles */
+:root {
+  --primary: #1e3a5f;
+  --secondary: #3d5a80;
+  --accent: #ee6c4d;
+  --background: #0d1b2a;
+  --surface: #1b263b;
+  --text: #e0e1dd;
+  --text-muted: #778da9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, var(--background) 0%, var(--surface) 100%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Glass effect utility */
+.glass {
+  background: rgba(27, 38, 59, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Map container */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  background: var(--background);
+  border-radius: 12px;
+}
+
+/* Country hover effect */
+.leaflet-interactive:hover {
+  fill-opacity: 0.8 !important;
+  cursor: pointer;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.loading-shimmer {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--secondary) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Stat card glow effects */
+.stat-gold {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.stat-stability {
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.2);
+}
+
+.stat-army {
+  box-shadow: 0 0 20px rgba(244, 67, 54, 0.2);
+}
+
+.stat-population {
+  box-shadow: 0 0 20px rgba(33, 150, 243, 0.2);
+}
+
+.stat-diplomacy {
+  box-shadow: 0 0 20px rgba(156, 39, 176, 0.2);
+}
+
+/* Choice cards */
+.choice-card {
+  transition: all 0.3s ease;
+}
+
+.choice-card:hover {
+  transform: translateX(8px);
+}
+
+.choice-low {
+  border-left: 4px solid #4caf50;
+}
+
+.choice-medium {
+  border-left: 4px solid #ff9800;
+}
+
+.choice-high {
+  border-left: 4px solid #f44336;
+}
+
+/* Tailwind v4 utility classes */
+.bg-background {
+  background-color: var(--background);
+}
+
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.text-text-main {
+  color: var(--text);
+}
+
+.text-text-muted {
+  color: var(--text-muted);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.border-accent {
+  border-color: var(--accent);
+}
+
+/* Floating animation for menu */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Gradient animation */
+@keyframes gradient-x {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease infinite;
+}
+
+/* Stat change animations */
+@keyframes stat-increase {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes stat-decrease {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.stat-change-up {
+  color: #4ade80;
+  animation: stat-increase 1.5s ease-out forwards;
+}
+
+.stat-change-down {
+  color: #f87171;
+  animation: stat-decrease 1.5s ease-out forwards;
+}
+
+/* Enhanced choice cards */
+.choice-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.choice-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transition: left 0.5s ease;
+}
+
+.choice-card:hover::before {
+  left: 100%;
+}
+
+.choice-card:hover {
+  transform: translateX(8px) scale(1.01);
+}
+
+/* Progress bar */
+.progress-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #f97316);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* Improved stat card hover */
+.stat-card {
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Country tooltip */
+.country-tooltip {
+  background: var(--surface) !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: 8px !important;
+  color: var(--text) !important;
+  font-weight: 500 !important;
+  padding: 4px 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.country-tooltip::before {
+  display: none !important;
+}
+
+/* Glow effect on hover */
+.glow-accent:hover {
+  box-shadow: 0 0 30px rgba(238, 108, 77, 0.4);
+}
+
+/* Loading spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
